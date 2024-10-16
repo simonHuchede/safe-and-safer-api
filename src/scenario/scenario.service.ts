@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ObjectId, Repository } from "typeorm";
+import { Repository } from "typeorm";
+import { ObjectId } from 'mongodb';
 import { Scenario } from './entities/scenario.entity';
 import { CreateScenarioDto } from './dto/create-scenario.dto';
 import { UpdateScenarioDto } from './dto/update-scenario.dto';
@@ -14,7 +15,14 @@ export class ScenarioService {
 
   // Créer un nouveau scénario
   async create(createScenarioDto: CreateScenarioDto): Promise<Scenario> {
-    const scenario = this.scenarioRepository.create(createScenarioDto);
+    const messagesWithIds = createScenarioDto.messages.map(message => ({
+      ...message,
+      messageId: new ObjectId(),
+    }));
+    const scenario = this.scenarioRepository.create({
+      ...createScenarioDto,
+      messages: messagesWithIds,
+    });
     return this.scenarioRepository.save(scenario);
   }
 

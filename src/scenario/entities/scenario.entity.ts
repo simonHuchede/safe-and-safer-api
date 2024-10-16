@@ -8,9 +8,12 @@ export class Scenario {
   @ObjectIdColumn()
   scenarioId: ObjectId;
 
-  @ApiProperty({ description: 'List of messages that make up the scenario', type: [Message] })
-  @Column(type => Message)
-  messages: Message[];  // Les messages qui composent le scénario
+  @ApiProperty({
+    description: 'List of messages that make up the scenario',
+    type: [Message],
+  })
+  @Column({ type: 'array' })
+  messages: Message[];
 
   @ApiProperty({ example: 5, description: 'Total number of threats in the scenario' })
   @Column()

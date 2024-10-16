@@ -43,7 +43,7 @@ export class MessageService {
 
   // Supprimer un message
   async remove(id: string): Promise<void> {
-    const objectId = new ObjectId(id);  // Utilisation de ObjectId pour MongoDB
+    const objectId = new ObjectId(id);
     const result = await this.messageRepository.delete({ messageId: objectId });
     if (result.affected === 0) {
       throw new NotFoundException(`Message #${id} not found`);

@@ -20,7 +20,11 @@ export class CreateGameDto {
   @Type(() => CreateMessageDto)
   identifiedThreats: CreateMessageDto[];
 
-  @ApiProperty({ description: 'Messages manqués que le joueur n\'a pas identifiés comme des menaces', type: [CreateMessageDto] })
+  @ApiProperty({
+    description:
+      "Messages manqués que le joueur n'a pas identifiés comme des menaces",
+    type: [CreateMessageDto],
+  })
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => CreateMessageDto)

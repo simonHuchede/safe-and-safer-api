@@ -19,6 +19,11 @@ export class UserService {
     return this.userRepository.save(user);
   }
 
+  async createBulk(createUsersDto: CreateUserDto[]): Promise<User[]> {
+    const users = this.userRepository.create(createUsersDto);
+    return this.userRepository.save(users);
+  }
+
   // Récupérer tous les utilisateurs
   async findAll(): Promise<User[]> {
     return this.userRepository.find();
