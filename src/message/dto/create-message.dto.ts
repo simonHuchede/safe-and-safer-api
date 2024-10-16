@@ -1,5 +1,6 @@
-import { IsString, IsBoolean, IsOptional, IsDateString } from 'class-validator';
+import { IsString, IsBoolean, IsOptional, IsDateString, IsNumber } from "class-validator";
 import { ApiProperty } from '@nestjs/swagger';
+import { Column } from "typeorm";
 
 export class CreateMessageDto {
 
@@ -10,6 +11,10 @@ export class CreateMessageDto {
   @ApiProperty({ description: 'Contenu du message' })
   @IsString()
   content: string;
+
+  @ApiProperty({ description: 'The number of the message to display in the conversation' })
+  @IsNumber()
+  orderNumber: number;
 
   @ApiProperty({ description: 'Horodatage du message' })
   @IsDateString()

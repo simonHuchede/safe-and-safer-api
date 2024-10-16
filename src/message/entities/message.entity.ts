@@ -15,15 +15,22 @@ export class Message {
   @Column()
   content: string;
 
+  @ApiProperty({ example: 1, description: 'The number of the message to display in the conversation' })
+  @Column()
+  orderNumber: number;
+
   @ApiProperty({ example: '2024-10-14T10:00:00Z', description: 'The timestamp when the message was sent' })
   @Column()
   timestamp: Date;
 
-  @ApiProperty({ example: false, description: 'Indicates if the message is a threat or not' })
+  @ApiProperty({
+    example: false,
+    description: 'Indicates if the message is a threat or not',
+  })
   @Column({ default: false })
-  isThreat: boolean;  // Indique si le message est une menace
+  isThreat: boolean;
 
   @ApiProperty({ example: 'Harassment', description: 'Type of threat, if any', required: false })
   @Column({ nullable: true })
-  threatType?: string;  // Type de menace, s'il y en a
+  threatType?: string;
 }
