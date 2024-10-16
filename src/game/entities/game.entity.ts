@@ -25,7 +25,10 @@ export class Game {
   @Column(type => Message)
   missedThreats: Message[];  // Messages de menace que le joueur a manqué
 
-  @ApiProperty({ example: 3, description: 'Number of threats identified by the player during the game' })
+  @ApiProperty({
+    example: 3,
+    description: 'Number of threats identified by the player during the game',
+  })
   @Column()
   threatsIdentified: number;  // Nombre de menaces identifiées par le joueur dans cette partie
 

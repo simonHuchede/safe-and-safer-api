@@ -19,6 +19,11 @@ export class MessageService {
     return this.messageRepository.save(message);
   }
 
+  async createBulk(createMessagesDto: CreateMessageDto[]): Promise<Message[]> {
+    const messages = this.messageRepository.create(createMessagesDto);
+    return this.messageRepository.save(messages);
+  }
+
   // Récupérer tous les messages
   async findAll(): Promise<Message[]> {
     return this.messageRepository.find();

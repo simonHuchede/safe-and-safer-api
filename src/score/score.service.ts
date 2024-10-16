@@ -18,6 +18,11 @@ export class ScoreService {
     return this.scoreRepository.save(score);
   }
 
+  async createBulk(createScoresDto: CreateScoreDto[]): Promise<Score[]> {
+    const scores = this.scoreRepository.create(createScoresDto);
+    return this.scoreRepository.save(scores);
+  }
+
   // Récupérer tous les scores
   async findAll(): Promise<Score[]> {
     return this.scoreRepository.find();

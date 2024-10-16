@@ -18,6 +18,11 @@ export class GameService {
     return this.gameRepository.save(game);
   }
 
+  async createBulk(createGamesDto: CreateGameDto[]): Promise<Game[]> {
+    const games = this.gameRepository.create(createGamesDto);
+    return this.gameRepository.save(games);
+  }
+
   // Récupérer toutes les parties (Games)
   async findAll(): Promise<Game[]> {
     return this.gameRepository.find();

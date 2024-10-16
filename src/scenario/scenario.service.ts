@@ -26,6 +26,23 @@ export class ScenarioService {
     return this.scenarioRepository.save(scenario);
   }
 
+  async createBulk(createScenariosDto: CreateScenarioDto[]): Promise<Scenario[]> {
+    const scenariosWithIds = createScenariosDto.map(scenarioDto => {
+      const messagesWithIds = scenarioDto.messages.map(message => ({
+        ...message,
+        messageId: new ObjectId(),
+      }));
+
+      return {
+        ...scenarioDto,
+        messages: messagesWithIds,
+      };
+    });
+
+    const scenarios = this.scenarioRepository.create(scenariosWithIds);
+    return this.scenarioRepository.save(scenarios);
+  }
+
   // Récupérer tous les scénarios
   async findAll(): Promise<Scenario[]> {
     return this.scenarioRepository.find();

@@ -3,6 +3,7 @@ import { GameService } from './game.service';
 import { CreateGameDto } from './dto/create-game.dto';
 import { UpdateGameDto } from './dto/update-game.dto';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import { Game } from "./entities/game.entity";
 
 @ApiTags('games')  // Ajoute une catégorie "games" dans Swagger
 @Controller('games')
@@ -13,6 +14,12 @@ export class GameController {
   @ApiOperation({ summary: 'Créer une nouvelle partie (game)' })
   create(@Body() createGameDto: CreateGameDto) {
     return this.gameService.create(createGameDto);
+  }
+
+  @Post('bulk-create')
+  @ApiOperation({ summary: 'Create multiple games' })
+  createBulk(@Body() createGamesDto: CreateGameDto[]): Promise<Game[]> {
+    return this.gameService.createBulk(createGamesDto);
   }
 
   @Get()

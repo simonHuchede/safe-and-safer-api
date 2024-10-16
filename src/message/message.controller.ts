@@ -3,6 +3,7 @@ import { MessageService } from './message.service';
 import { CreateMessageDto } from './dto/create-message.dto';
 import { UpdateMessageDto } from './dto/update-message.dto';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import { Message } from "./entities/message.entity";
 
 @ApiTags('messages')  // Ajoute une catégorie "messages" dans Swagger
 @Controller('messages')
@@ -13,6 +14,12 @@ export class MessageController {
   @ApiOperation({ summary: 'Créer un nouveau message' })
   create(@Body() createMessageDto: CreateMessageDto) {
     return this.messageService.create(createMessageDto);
+  }
+
+  @Post('bulk-create')
+  @ApiOperation({ summary: 'Create multiple messages' })
+  createBulk(@Body() createMessagesDto: CreateMessageDto[]): Promise<Message[]> {
+    return this.messageService.createBulk(createMessagesDto);
   }
 
   @Get()

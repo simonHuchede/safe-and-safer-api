@@ -3,8 +3,9 @@ import { ScoreService } from './score.service';
 import { CreateScoreDto } from './dto/create-score.dto';
 import { UpdateScoreDto } from './dto/update-score.dto';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import { Score } from "./entities/score.entity";
 
-@ApiTags('scores')  // Ajoute une catégorie "scores" dans Swagger
+@ApiTags('scores')
 @Controller('scores')
 export class ScoreController {
   constructor(private readonly scoreService: ScoreService) {}
@@ -13,6 +14,12 @@ export class ScoreController {
   @ApiOperation({ summary: 'Créer un nouveau score' })
   create(@Body() createScoreDto: CreateScoreDto) {
     return this.scoreService.create(createScoreDto);
+  }
+
+  @Post('bulk-create')
+  @ApiOperation({ summary: 'Create multiple scores' })
+  createBulk(@Body() createScoresDto: CreateScoreDto[]): Promise<Score[]> {
+    return this.scoreService.createBulk(createScoresDto);
   }
 
   @Get()

@@ -10,7 +10,7 @@ import { ObjectId } from 'mongodb';
 export class UserService {
   constructor(
     @InjectRepository(User)
-    private readonly userRepository: Repository<User>,  // Injecte le repository pour l'entité User
+    private readonly userRepository: Repository<User>,
   ) {}
 
   // Créer un nouvel utilisateur

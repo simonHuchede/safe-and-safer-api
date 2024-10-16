@@ -3,6 +3,7 @@ import { ScenarioService } from './scenario.service';
 import { CreateScenarioDto } from './dto/create-scenario.dto';
 import { UpdateScenarioDto } from './dto/update-scenario.dto';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import { Scenario } from "./entities/scenario.entity";
 
 @ApiTags('scenarios')  // Ajoute une catégorie "scenarios" dans Swagger
 @Controller('scenarios')
@@ -13,6 +14,12 @@ export class ScenarioController {
   @ApiOperation({ summary: 'Créer un nouveau scénario' })
   create(@Body() createScenarioDto: CreateScenarioDto) {
     return this.scenarioService.create(createScenarioDto);
+  }
+
+  @Post('bulk-create')
+  @ApiOperation({ summary: 'Create multiple scenarios' })
+  createBulk(@Body() createScenariosDto: CreateScenarioDto[]): Promise<Scenario[]> {
+    return this.scenarioService.createBulk(createScenariosDto);
   }
 
   @Get()
