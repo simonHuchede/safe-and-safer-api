@@ -15,9 +15,12 @@ export class Scenario {
   @Column({ type: 'array' })
   messages: Message[];
 
-  @ApiProperty({ example: 5, description: 'Total number of threats in the scenario' })
+  @ApiProperty({
+    example: 5,
+    description: 'Total number of threats in the scenario',
+  })
   @Column()
-  totalThreats: number;  // Nombre total de menaces dans le scénario
+  totalThreats: number;
 
   @ApiProperty({ example: '2024-10-14T10:20:00Z', description: 'Estimated time to complete the scenario' })
   @Column()

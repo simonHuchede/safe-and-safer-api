@@ -13,16 +13,19 @@ export class Game {
   @Column()
   userId: string;
 
-  @ApiProperty({ description: 'The scenario played by the user', type: () => Scenario })
+  @ApiProperty({
+    description: 'The scenario played by the user',
+    type: () => Scenario,
+  })
   @Column(type => Scenario)
   scenario: Scenario;  // Le scénario joué par l'utilisateur
 
   @ApiProperty({ description: 'List of threats identified during the game', type: [Message] })
-  @Column(type => Message)
+  @Column({ type: 'array' })
   identifiedThreats: Message[];  // Messages identifiés comme menaces par le joueur
 
   @ApiProperty({ description: 'List of threats missed by the player during the game', type: [Message] })
-  @Column(type => Message)
+  @Column({ type: 'array' })
   missedThreats: Message[];  // Messages de menace que le joueur a manqué
 
   @ApiProperty({

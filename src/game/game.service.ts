@@ -38,6 +38,15 @@ export class GameService {
     return game;
   }
 
+  async findOneByUserId(userId: string): Promise<Game> {
+    const game = await this.gameRepository.findOneBy({ userId });
+
+    if (!game) {
+      throw new NotFoundException(`Game for user ${userId} not found`);
+    }
+    return game;
+  }
+
   // Mettre à jour une partie (Game) partiellement avec PATCH
   async update(id: string, updateGameDto: UpdateGameDto): Promise<Game> {
     const game = await this.findOne(id);

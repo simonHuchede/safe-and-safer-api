@@ -5,7 +5,7 @@ import { CreateScenarioDto } from '../../scenario/dto/create-scenario.dto';
 import { CreateMessageDto } from '../../message/dto/create-message.dto';
 
 export class CreateGameDto {
-  @ApiProperty({ description: 'ID de l\'utilisateur jouant le jeu' })
+  @ApiProperty({ description: "ID de l'utilisateur jouant le jeu" })
   @IsString()
   userId: string;
 

@@ -15,7 +15,10 @@ export class Message {
   @Column()
   content: string;
 
-  @ApiProperty({ example: 1, description: 'The number of the message to display in the conversation' })
+  @ApiProperty({
+    example: 1,
+    description: 'The number of the message to display in the conversation',
+  })
   @Column()
   orderNumber: number;
 

@@ -38,6 +38,15 @@ export class ScoreService {
     return score;
   }
 
+  async findOneByUserId(userId: string): Promise<Score> {
+    const score = await this.scoreRepository.findOneBy({ userId });
+
+    if (!score) {
+      throw new NotFoundException(`Score for user ${userId} not found`);
+    }
+    return score;
+  }
+
   // Mise à jour partielle d'un score avec PATCH
   async update(id: string, updateScoreDto: UpdateScoreDto): Promise<Score> {
     const score = await this.findOne(id);

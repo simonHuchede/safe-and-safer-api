@@ -34,6 +34,12 @@ export class GameController {
     return this.gameService.findOne(id);
   }
 
+  @Get('user/:userId')
+  @ApiOperation({ summary: 'Find game by user ID' })
+  findOneByUserId(@Param('userId') userId: string): Promise<Game> {
+    return this.gameService.findOneByUserId(userId);
+  }
+
   @Patch(':id')
   @ApiOperation({ summary: 'Mettre à jour une partie (game) par son ID' })
   update(@Param('id') id: string, @Body() updateGameDto: UpdateGameDto) {

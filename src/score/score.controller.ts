@@ -34,6 +34,12 @@ export class ScoreController {
     return this.scoreService.findOne(id);
   }
 
+  @Get('user/:userId')
+  @ApiOperation({ summary: 'Find score by user ID' })
+  findOneByUserId(@Param('userId') userId: string): Promise<Score> {
+    return this.scoreService.findOneByUserId(userId);
+  }
+
   @Patch(':id')
   @ApiOperation({ summary: 'Mettre à jour un score par son ID' })
   update(@Param('id') id: string, @Body() updateScoreDto: UpdateScoreDto) {

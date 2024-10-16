@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from "typeorm";
+import { Repository } from 'typeorm';
 import { ObjectId } from 'mongodb';
 import { Scenario } from './entities/scenario.entity';
 import { CreateScenarioDto } from './dto/create-scenario.dto';
@@ -15,7 +15,7 @@ export class ScenarioService {
 
   // Créer un nouveau scénario
   async create(createScenarioDto: CreateScenarioDto): Promise<Scenario> {
-    const messagesWithIds = createScenarioDto.messages.map(message => ({
+    const messagesWithIds = createScenarioDto.messages.map((message) => ({
       ...message,
       messageId: new ObjectId(),
     }));
@@ -26,9 +26,11 @@ export class ScenarioService {
     return this.scenarioRepository.save(scenario);
   }
 
-  async createBulk(createScenariosDto: CreateScenarioDto[]): Promise<Scenario[]> {
-    const scenariosWithIds = createScenariosDto.map(scenarioDto => {
-      const messagesWithIds = scenarioDto.messages.map(message => ({
+  async createBulk(
+    createScenariosDto: CreateScenarioDto[],
+  ): Promise<Scenario[]> {
+    const scenariosWithIds = createScenariosDto.map((scenarioDto) => {
+      const messagesWithIds = scenarioDto.messages.map((message) => ({
         ...message,
         messageId: new ObjectId(),
       }));
@@ -51,7 +53,9 @@ export class ScenarioService {
   // Récupérer un scénario par son ID
   async findOne(id: string): Promise<Scenario> {
     const objectId = new ObjectId(id);
-    const scenario = await this.scenarioRepository.findOneBy({ scenarioId: objectId });
+    const scenario = await this.scenarioRepository.findOneBy({
+      scenarioId: objectId,
+    });
     if (!scenario) {
       throw new NotFoundException(`Scenario #${id} not found`);
     }
@@ -59,7 +63,10 @@ export class ScenarioService {
   }
 
   // Mise à jour partielle d'un scénario avec PATCH
-  async update(id: string, updateScenarioDto: UpdateScenarioDto): Promise<Scenario> {
+  async update(
+    id: string,
+    updateScenarioDto: UpdateScenarioDto,
+  ): Promise<Scenario> {
     const scenario = await this.findOne(id);
     Object.assign(scenario, updateScenarioDto);
     return this.scenarioRepository.save(scenario);

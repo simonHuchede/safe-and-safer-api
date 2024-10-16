@@ -13,8 +13,8 @@ export class Score {
   userId: string;  // Identifiant de l'utilisateur
 
   @ApiProperty({ description: 'List of games played by the user', type: [Game] })
-  @Column(type => Game)
-  games: Game[];  // Liste des parties jouées par l'utilisateur
+  @Column({ type : 'array'})
+  games: Game[];
 
   @ApiProperty({ example: 250, description: 'Total score of the user based on games played' })
   @Column()
