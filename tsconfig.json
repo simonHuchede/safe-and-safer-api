@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "commonjs",  // Assure que Node.js utilise CommonJS pour __dirname
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
@@ -8,7 +8,7 @@
     "allowSyntheticDefaultImports": true,
     "target": "ES2021",
     "sourceMap": true,
-    "outDir": "./dist",
+    "outDir": "./dist",  // Générer la compilation dans le répertoire dist
     "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,
@@ -16,6 +16,15 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
-  }
+    "noFallthroughCasesInSwitch": false,
+    "types": ["node"]
+  },
+  "include": [
+    "globals.d.ts",
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",  // Exclut node_modules
+    "dist"           // Exclut le répertoire dist
+  ]
 }
