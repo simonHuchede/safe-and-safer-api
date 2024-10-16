@@ -1,11 +1,13 @@
-import { IsString, IsArray, IsNumber, IsDateString, ValidateNested } from 'class-validator';
+import { IsArray, IsNumber, IsDateString, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 import { CreateMessageDto } from '../../message/dto/create-message.dto';
 
 export class CreateScenarioDto {
-
-  @ApiProperty({ description: 'Liste des messages associés au scénario', type: [CreateMessageDto] })
+  @ApiProperty({
+    description: 'Liste des messages associés au scénario',
+    type: [CreateMessageDto],
+  })
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => CreateMessageDto)

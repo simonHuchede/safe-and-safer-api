@@ -1,6 +1,5 @@
 import { IsString, IsBoolean, IsOptional, IsDateString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { ObjectId } from "typeorm";
 
 export class CreateMessageDto {
 

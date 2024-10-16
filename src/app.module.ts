@@ -8,6 +8,7 @@ import { GameModule } from "./game/game.module";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import * as process from "node:process";
 import { ConfigModule } from '@nestjs/config';
+import { UserModule } from './user/user.module';
 
 
 
@@ -23,7 +24,7 @@ import { ConfigModule } from '@nestjs/config';
     synchronize: true,  // Active la synchronisation automatique (en développement)
     entities: [__dirname + '/**/*.entity{.ts,.js}'],  // Charge toutes les entités
   }),
-    MessageModule, ScoreModule, ScenarioModule, GameModule],
+    MessageModule, ScoreModule, ScenarioModule, GameModule, UserModule],
   controllers: [AppController],
   providers: [AppService],
 })
