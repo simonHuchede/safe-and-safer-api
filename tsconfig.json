@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "commonjs",  // Assure que Node.js utilise CommonJS pour __dirname
+    "module": "commonjs",
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
@@ -8,7 +8,7 @@
     "allowSyntheticDefaultImports": true,
     "target": "ES2021",
     "sourceMap": true,
-    "outDir": "./dist",  // Générer la compilation dans le répertoire dist
+    "outDir": "./dist",
     "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,
@@ -25,7 +25,7 @@
     "src/**/*.spec.ts"
   ],
   "exclude": [
-    "node_modules",  // Exclut node_modules
-    "dist"           // Exclut le répertoire dist
+    "node_modules",
+    "dist"
   ]
 }
