@@ -11,7 +11,7 @@ export class UserService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
-  ) {}
+  ) { }
 
 
   async create(createUserDto: CreateUserDto): Promise<User> {
@@ -33,6 +33,14 @@ export class UserService {
     const user = await this.userRepository.findOneBy({ _id: objectId });
     if (!user) {
       throw new NotFoundException(`User with ID ${id} not found`);
+    }
+    return user;
+  }
+
+  async findOneByUsername(username: string): Promise<User> {
+    const user = await this.userRepository.findOneBy({ username });
+    if (!user) {
+      throw new NotFoundException(`User with username ${username} not found`);
     }
     return user;
   }
