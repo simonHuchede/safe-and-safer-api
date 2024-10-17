@@ -9,6 +9,7 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import * as process from "node:process";
 import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
 
 
 
@@ -24,7 +25,7 @@ import { UserModule } from './user/user.module';
     synchronize: true,  // Active la synchronisation automatique (en développement)
     entities: [__dirname + '/**/*.entity{.ts,.js}'],  // Charge toutes les entités
   }),
-    MessageModule, ScoreModule, ScenarioModule, GameModule, UserModule],
+    MessageModule, ScoreModule, ScenarioModule, GameModule, UserModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })

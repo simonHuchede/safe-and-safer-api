@@ -11,7 +11,7 @@ export class UserService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
-  ) {}
+  ) { }
 
   // Créer un nouvel utilisateur
   async create(createUserDto: CreateUserDto): Promise<User> {
@@ -38,6 +38,16 @@ export class UserService {
     }
     return user;
   }
+
+  // Récupérer un utilisateur par son username
+  async findOneByUsername(username: string): Promise<User> {
+    const user = await this.userRepository.findOneBy({ username });
+    if (!user) {
+      throw new NotFoundException(`User with username ${username} not found`);
+    }
+    return user;
+  }
+
 
   // Mettre à jour un utilisateur
   async update(id: string, updateUserDto: UpdateUserDto): Promise<User> {
