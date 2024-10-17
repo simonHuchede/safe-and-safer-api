@@ -53,13 +53,7 @@ export class ScenarioService {
   // Récupérer un scénario par son ID
   async findOne(id: string): Promise<Scenario> {
     const objectId = new ObjectId(id);
-    const scenario = await this.scenarioRepository.findOneBy({
-      scenarioId: objectId,
-    });
-    if (!scenario) {
-      throw new NotFoundException(`Scenario #${id} not found`);
-    }
-    return scenario;
+    return this.scenarioRepository.findOneBy({_id: objectId});
   }
 
   // Mise à jour partielle d'un scénario avec PATCH

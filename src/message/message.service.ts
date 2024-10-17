@@ -32,7 +32,7 @@ export class MessageService {
   // Récupérer un message par son ID
   async findOne(id: string): Promise<Message> {
     const objectId = new ObjectId(id);  // Utilisation de ObjectId pour MongoDB
-    const message = await this.messageRepository.findOneBy({ messageId: objectId });
+    const message = await this.messageRepository.findOneBy({ _id: objectId });
     if (!message) {
       throw new NotFoundException(`Message #${id} not found`);
     }
@@ -49,7 +49,7 @@ export class MessageService {
   // Supprimer un message
   async remove(id: string): Promise<void> {
     const objectId = new ObjectId(id);
-    const result = await this.messageRepository.delete({ messageId: objectId });
+    const result = await this.messageRepository.delete({ _id: objectId });
     if (result.affected === 0) {
       throw new NotFoundException(`Message #${id} not found`);
     }

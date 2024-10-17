@@ -4,12 +4,16 @@ import { ObjectId, Repository } from "typeorm";
 import { Game } from './entities/game.entity';
 import { CreateGameDto } from './dto/create-game.dto';
 import { UpdateGameDto } from './dto/update-game.dto';
+import { ScenarioService } from "../scenario/scenario.service";
+import { UserService } from "../user/user.service";
 
 @Injectable()
 export class GameService {
   constructor(
     @InjectRepository(Game)
     private readonly gameRepository: Repository<Game>,
+    private readonly scenarioService: ScenarioService,
+    private readonly userService: UserService,
   ) {}
 
   // Créer une nouvelle partie (Game)
@@ -21,6 +25,28 @@ export class GameService {
   async createBulk(createGamesDto: CreateGameDto[]): Promise<Game[]> {
     const games = this.gameRepository.create(createGamesDto);
     return this.gameRepository.save(games);
+  }
+
+  async createByScenarioId(userId: string, scenarioId: string): Promise<Game> {
+    const scenario = await this.scenarioService.findOne(scenarioId);
+    const user = await this.userService.findOne(userId);
+    if (!scenario) {
+      throw new NotFoundException(`Scenario with ID ${scenarioId} not found`);
+    }
+    if (!user) {
+      throw new NotFoundException(`Scenario with ID ${userId} not found`);
+    }
+    const newGame = this.gameRepository.create({
+      userId,
+      scenario,
+      identifiedThreats: [],
+      missedThreats: [],
+      threatsIdentified: 0,
+      score: 0,
+    });
+
+    // Sauvegarde de la nouvelle Game dans la base de données
+    return this.gameRepository.save(newGame);
   }
 
   // Récupérer toutes les parties (Games)

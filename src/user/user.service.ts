@@ -32,7 +32,7 @@ export class UserService {
   // Récupérer un utilisateur par son ID
   async findOne(id: string): Promise<User> {
     const objectId = new ObjectId(id);
-    const user = await this.userRepository.findOneBy({ id: objectId });
+    const user = await this.userRepository.findOneBy({ _id: objectId });
     if (!user) {
       throw new NotFoundException(`User with ID ${id} not found`);
     }
@@ -49,7 +49,7 @@ export class UserService {
   // Supprimer un utilisateur
   async remove(id: string): Promise<void> {
     const objectId = new ObjectId(id);
-    const result = await this.userRepository.delete({ id: objectId });
+    const result = await this.userRepository.delete({ _id: objectId });
     if (result.affected === 0) {
       throw new NotFoundException(`User with ID ${id} not found`);
     }

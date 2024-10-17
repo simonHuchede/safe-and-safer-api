@@ -5,7 +5,7 @@ import { ApiProperty } from '@nestjs/swagger';
 export class Message {
   @ApiProperty({ example: '60c72b2f9b1e8b6f7f3e3c9f', description: 'Unique identifier for the message' })
   @ObjectIdColumn()
-  messageId: ObjectId;
+  _id: ObjectId;
 
   @ApiProperty({ example: 'john_doe', description: 'The sender of the message' })
   @Column()
@@ -22,7 +22,10 @@ export class Message {
   @Column()
   orderNumber: number;
 
-  @ApiProperty({ example: '2024-10-14T10:00:00Z', description: 'The timestamp when the message was sent' })
+  @ApiProperty({
+    example: '2024-10-14T10:00:00Z',
+    description: 'The timestamp when the message was sent',
+  })
   @Column()
   timestamp: Date;
 

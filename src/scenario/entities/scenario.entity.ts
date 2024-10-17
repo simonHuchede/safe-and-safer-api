@@ -4,9 +4,12 @@ import { ApiProperty } from '@nestjs/swagger';
 
 @Entity('scenarios')
 export class Scenario {
-  @ApiProperty({ example: '60c72b2f9b1e8b6f7f3e3c9f', description: 'Unique identifier for the scenario' })
+  @ApiProperty({
+    example: '60c72b2f9b1e8b6f7f3e3c9f',
+    description: 'Unique identifier for the scenario',
+  })
   @ObjectIdColumn()
-  scenarioId: ObjectId;
+  _id: ObjectId;
 
   @ApiProperty({
     description: 'List of messages that make up the scenario',

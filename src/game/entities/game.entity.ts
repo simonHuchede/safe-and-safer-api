@@ -18,11 +18,11 @@ export class Game {
     type: () => Scenario,
   })
   @Column(type => Scenario)
-  scenario: Scenario;  // Le scénario joué par l'utilisateur
+  scenario: Scenario;
 
   @ApiProperty({ description: 'List of threats identified during the game', type: [Message] })
   @Column({ type: 'array' })
-  identifiedThreats: Message[];  // Messages identifiés comme menaces par le joueur
+  identifiedThreats: Message[];
 
   @ApiProperty({ description: 'List of threats missed by the player during the game', type: [Message] })
   @Column({ type: 'array' })

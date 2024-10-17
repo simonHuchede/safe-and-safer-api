@@ -5,8 +5,8 @@ import { ApiProperty } from '@nestjs/swagger';
 @Entity()
 export class User {
   @ApiProperty({ example: '60c72b2f9b1e8b6f7f3e3c9f', description: 'The unique identifier for the user' })
-  @ObjectIdColumn()  // Utilise ObjectId pour MongoDB
-  id: ObjectId;
+  @ObjectIdColumn()
+  _id: ObjectId;
 
   @ApiProperty({ example: 'john_doe', description: 'The username of the user' })
   @Column()
