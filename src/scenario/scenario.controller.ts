@@ -5,7 +5,7 @@ import { UpdateScenarioDto } from './dto/update-scenario.dto';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { Scenario } from "./entities/scenario.entity";
 
-@ApiTags('scenarios')  // Ajoute une catégorie "scenarios" dans Swagger
+@ApiTags('scenarios')
 @Controller('scenarios')
 export class ScenarioController {
   constructor(private readonly scenarioService: ScenarioService) {}

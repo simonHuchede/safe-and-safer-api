@@ -18,5 +18,5 @@ export class User {
 
   @ApiProperty({ example: 'hashedpassword123', description: 'The hashed password of the user', writeOnly: true })
   @Column()
-  password: string;  // Le mot de passe sera hashé, pas stocké en clair
+  password: string;
 }

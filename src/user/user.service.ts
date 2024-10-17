@@ -13,7 +13,7 @@ export class UserService {
     private readonly userRepository: Repository<User>,
   ) {}
 
-  // Créer un nouvel utilisateur
+
   async create(createUserDto: CreateUserDto): Promise<User> {
     const user = this.userRepository.create(createUserDto);
     return this.userRepository.save(user);
@@ -24,12 +24,10 @@ export class UserService {
     return this.userRepository.save(users);
   }
 
-  // Récupérer tous les utilisateurs
   async findAll(): Promise<User[]> {
     return this.userRepository.find();
   }
 
-  // Récupérer un utilisateur par son ID
   async findOne(id: string): Promise<User> {
     const objectId = new ObjectId(id);
     const user = await this.userRepository.findOneBy({ _id: objectId });
@@ -39,14 +37,12 @@ export class UserService {
     return user;
   }
 
-  // Mettre à jour un utilisateur
   async update(id: string, updateUserDto: UpdateUserDto): Promise<User> {
     const user = await this.findOne(id);
     Object.assign(user, updateUserDto);
     return this.userRepository.save(user);
   }
 
-  // Supprimer un utilisateur
   async remove(id: string): Promise<void> {
     const objectId = new ObjectId(id);
     const result = await this.userRepository.delete({ _id: objectId });

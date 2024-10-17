@@ -16,7 +16,7 @@ export class GameService {
     private readonly userService: UserService,
   ) {}
 
-  // Créer une nouvelle partie (Game)
+
   async create(createGameDto: CreateGameDto): Promise<Game> {
     const game = this.gameRepository.create(createGameDto);
     return this.gameRepository.save(game);
@@ -45,16 +45,13 @@ export class GameService {
       score: 0,
     });
 
-    // Sauvegarde de la nouvelle Game dans la base de données
     return this.gameRepository.save(newGame);
   }
 
-  // Récupérer toutes les parties (Games)
   async findAll(): Promise<Game[]> {
     return this.gameRepository.find();
   }
 
-  // Récupérer une partie par son ID
   async findOne(id: string): Promise<Game> {
     const objectId = new ObjectId(id);
     const game = await this.gameRepository.findOneBy({ _id: objectId });
@@ -73,14 +70,12 @@ export class GameService {
     return game;
   }
 
-  // Mettre à jour une partie (Game) partiellement avec PATCH
   async update(id: string, updateGameDto: UpdateGameDto): Promise<Game> {
     const game = await this.findOne(id);
     Object.assign(game, updateGameDto);
     return this.gameRepository.save(game);
   }
 
-  // Supprimer une partie (Game) par son ID
   async remove(id: string): Promise<void> {
     const result = await this.gameRepository.delete(id);
     if (result.affected === 0) {

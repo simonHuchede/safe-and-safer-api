@@ -14,15 +14,15 @@ import { UserModule } from './user/user.module';
 
 @Module({
   imports: [ConfigModule.forRoot({
-    envFilePath: '.env.local',  // Charge le fichier .env.local
-    isGlobal: true,  // Rend les variables accessibles globalement
+    envFilePath: '.env.local',
+    isGlobal: true,
   }),
     TypeOrmModule.forRoot({
     type: 'mongodb',
     url: process.env.DATABASE_URL,
     useUnifiedTopology: true,
-    synchronize: true,  // Active la synchronisation automatique (en développement)
-    entities: [__dirname + '/**/*.entity{.ts,.js}'],  // Charge toutes les entités
+    synchronize: true,
+    entities: [__dirname + '/**/*.entity{.ts,.js}'],
   }),
     MessageModule, ScoreModule, ScenarioModule, GameModule, UserModule],
   controllers: [AppController],

@@ -13,7 +13,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 
-@ApiTags('users') // Organise les routes dans la catégorie "users" dans Swagger
+@ApiTags('users')
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -70,8 +70,8 @@ export class UserController {
   }
   @ApiOperation({ summary: 'Create multiple users' })
   @ApiResponse({ status: 201, description: 'Users have been successfully created.', type: [User] })
-  @Post('bulk-create')  // Nouveau point de terminaison pour créer plusieurs utilisateurs
+  @Post('bulk-create')
   createBulk(@Body() createUsersDto: CreateUserDto[]): Promise<User[]> {
-    return this.userService.createBulk(createUsersDto);  // Appel au service pour créer plusieurs utilisateurs
+    return this.userService.createBulk(createUsersDto);
   }
 }

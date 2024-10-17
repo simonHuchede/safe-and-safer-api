@@ -26,18 +26,18 @@ export class Game {
 
   @ApiProperty({ description: 'List of threats missed by the player during the game', type: [Message] })
   @Column({ type: 'array' })
-  missedThreats: Message[];  // Messages de menace que le joueur a manqué
+  missedThreats: Message[];
 
   @ApiProperty({
     example: 3,
     description: 'Number of threats identified by the player during the game',
   })
   @Column()
-  threatsIdentified: number;  // Nombre de menaces identifiées par le joueur dans cette partie
+  threatsIdentified: number;
 
   @ApiProperty({ example: 85, description: 'The score obtained by the player during the game' })
   @Column()
-  score: number;  // Score obtenu par le joueur dans cette partie
+  score: number;
 
   @ApiProperty({ description: 'The date when the game was created' })
   @CreateDateColumn()

@@ -4,7 +4,7 @@ import { CreateUserDto } from './create-user.dto';
 
 export class UpdateUserDto extends PartialType(CreateUserDto) {
   @ApiProperty({ example: 'john_doe_updated', description: 'The updated username of the user', required: false })
-  @IsOptional()  // Le champ est optionnel lors de la mise à jour
+  @IsOptional()
   @IsString()
   username?: string;
 

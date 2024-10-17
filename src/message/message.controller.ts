@@ -5,7 +5,7 @@ import { UpdateMessageDto } from './dto/update-message.dto';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { Message } from "./entities/message.entity";
 
-@ApiTags('messages')  // Ajoute une catégorie "messages" dans Swagger
+@ApiTags('messages')
 @Controller('messages')
 export class MessageController {
   constructor(private readonly messageService: MessageService) {}

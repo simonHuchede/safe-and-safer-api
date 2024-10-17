@@ -4,12 +4,12 @@ import { GameService } from './game.service';
 import { GameController } from './game.controller';
 import { Game } from './entities/game.entity';
 import { ScenarioModule } from "../scenario/scenario.module";
-import { UserModule } from "../user/user.module";
+import { UserModule } from '../user/user.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Game]), ScenarioModule, UserModule],  // Intègre l'entité Game
+  imports: [TypeOrmModule.forFeature([Game]), ScenarioModule, UserModule],
   controllers: [GameController],
   providers: [GameService],
-  exports: [GameService], // Si tu veux utiliser GameService ailleurs
+  exports: [GameService],
 })
 export class GameModule {}

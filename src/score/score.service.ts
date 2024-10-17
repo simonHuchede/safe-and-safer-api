@@ -12,7 +12,6 @@ export class ScoreService {
     private readonly scoreRepository: Repository<Score>,
   ) {}
 
-  // Créer un nouveau score
   async create(createScoreDto: CreateScoreDto): Promise<Score> {
     const score = this.scoreRepository.create(createScoreDto);
     return this.scoreRepository.save(score);
@@ -23,12 +22,10 @@ export class ScoreService {
     return this.scoreRepository.save(scores);
   }
 
-  // Récupérer tous les scores
   async findAll(): Promise<Score[]> {
     return this.scoreRepository.find();
   }
 
-  // Récupérer un score par son ID
   async findOne(id: string): Promise<Score> {
     const objectId = new ObjectId(id);
     const score = await this.scoreRepository.findOneBy({ _id: objectId });
@@ -47,14 +44,12 @@ export class ScoreService {
     return score;
   }
 
-  // Mise à jour partielle d'un score avec PATCH
   async update(id: string, updateScoreDto: UpdateScoreDto): Promise<Score> {
     const score = await this.findOne(id);
     Object.assign(score, updateScoreDto);
     return this.scoreRepository.save(score);
   }
 
-  // Supprimer un score
   async remove(id: string): Promise<void> {
     const result = await this.scoreRepository.delete(id);
     if (result.affected === 0) {

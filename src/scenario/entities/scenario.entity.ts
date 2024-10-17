@@ -27,5 +27,5 @@ export class Scenario {
 
   @ApiProperty({ example: '2024-10-14T10:20:00Z', description: 'Estimated time to complete the scenario' })
   @Column()
-  completionTime: Date;  // Temps estimé pour compléter le scénario
+  completionTime: Date;
 }
