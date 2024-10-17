@@ -5,9 +5,9 @@ import { ScenarioController } from './scenario.controller';
 import { Scenario } from './entities/scenario.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Scenario])],  // Intègre l'entité Scenario
+  imports: [TypeOrmModule.forFeature([Scenario])],
   controllers: [ScenarioController],
   providers: [ScenarioService],
-  exports: [ScenarioService],  // Si tu veux utiliser ScenarioService ailleurs
+  exports: [ScenarioService],
 })
 export class ScenarioModule {}

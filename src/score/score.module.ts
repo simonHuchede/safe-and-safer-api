@@ -5,9 +5,9 @@ import { ScoreController } from './score.controller';
 import { Score } from './entities/score.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Score])],  // Intègre l'entité Score
+  imports: [TypeOrmModule.forFeature([Score])],
   controllers: [ScoreController],
   providers: [ScoreService],
-  exports: [ScoreService],  // Si tu veux utiliser ScoreService ailleurs
+  exports: [ScoreService],
 })
 export class ScoreModule {}

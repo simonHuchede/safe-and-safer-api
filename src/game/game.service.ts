@@ -4,15 +4,19 @@ import { ObjectId, Repository } from "typeorm";
 import { Game } from './entities/game.entity';
 import { CreateGameDto } from './dto/create-game.dto';
 import { UpdateGameDto } from './dto/update-game.dto';
+import { ScenarioService } from "../scenario/scenario.service";
+import { UserService } from "../user/user.service";
 
 @Injectable()
 export class GameService {
   constructor(
     @InjectRepository(Game)
     private readonly gameRepository: Repository<Game>,
+    private readonly scenarioService: ScenarioService,
+    private readonly userService: UserService,
   ) {}
 
-  // Créer une nouvelle partie (Game)
+
   async create(createGameDto: CreateGameDto): Promise<Game> {
     const game = this.gameRepository.create(createGameDto);
     return this.gameRepository.save(game);
@@ -23,12 +27,31 @@ export class GameService {
     return this.gameRepository.save(games);
   }
 
-  // Récupérer toutes les parties (Games)
+  async createByScenarioId(userId: string, scenarioId: string): Promise<Game> {
+    const scenario = await this.scenarioService.findOne(scenarioId);
+    const user = await this.userService.findOne(userId);
+    if (!scenario) {
+      throw new NotFoundException(`Scenario with ID ${scenarioId} not found`);
+    }
+    if (!user) {
+      throw new NotFoundException(`Scenario with ID ${userId} not found`);
+    }
+    const newGame = this.gameRepository.create({
+      userId,
+      scenario,
+      identifiedThreats: [],
+      missedThreats: [],
+      threatsIdentified: 0,
+      score: 0,
+    });
+
+    return this.gameRepository.save(newGame);
+  }
+
   async findAll(): Promise<Game[]> {
     return this.gameRepository.find();
   }
 
-  // Récupérer une partie par son ID
   async findOne(id: string): Promise<Game> {
     const objectId = new ObjectId(id);
     const game = await this.gameRepository.findOneBy({ _id: objectId });
@@ -47,14 +70,12 @@ export class GameService {
     return game;
   }
 
-  // Mettre à jour une partie (Game) partiellement avec PATCH
   async update(id: string, updateGameDto: UpdateGameDto): Promise<Game> {
     const game = await this.findOne(id);
     Object.assign(game, updateGameDto);
     return this.gameRepository.save(game);
   }
 
-  // Supprimer une partie (Game) par son ID
   async remove(id: string): Promise<void> {
     const result = await this.gameRepository.delete(id);
     if (result.affected === 0) {

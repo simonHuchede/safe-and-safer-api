@@ -5,8 +5,8 @@ import { ApiProperty } from '@nestjs/swagger';
 @Entity()
 export class User {
   @ApiProperty({ example: '60c72b2f9b1e8b6f7f3e3c9f', description: 'The unique identifier for the user' })
-  @ObjectIdColumn()  // Utilise ObjectId pour MongoDB
-  id: ObjectId;
+  @ObjectIdColumn()
+  _id: ObjectId;
 
   @ApiProperty({ example: 'john_doe', description: 'The username of the user' })
   @Column()
@@ -18,5 +18,5 @@ export class User {
 
   @ApiProperty({ example: 'hashedpassword123', description: 'The hashed password of the user', writeOnly: true })
   @Column()
-  password: string;  // Le mot de passe sera hashé, pas stocké en clair
+  password: string;
 }

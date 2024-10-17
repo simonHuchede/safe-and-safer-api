@@ -5,8 +5,9 @@ import { UpdateGameDto } from './dto/update-game.dto';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { Game } from "./entities/game.entity";
 import { AuthGuard } from 'src/auth/auth.guard';
+import { CreateGameByScenarioDto } from "./dto/create-game-by-scenario.dto";
 
-@ApiTags('games')  // Ajoute une catégorie "games" dans Swagger
+@ApiTags('games')
 @Controller('games')
 export class GameController {
   constructor(private readonly gameService: GameService) { }
@@ -25,6 +26,17 @@ export class GameController {
     return this.gameService.createBulk(createGamesDto);
   }
 
+  @UseGuards(AuthGuard)
+  @Post('create-by-scenario/:scenarioId')
+  @ApiOperation({ summary: 'Create a game by scenario ID' })
+  createByScenarioId(
+    @Param('scenarioId') scenarioId: string,
+    @Body() createGameByScenarioDto: CreateGameByScenarioDto,
+  ): Promise<Game> {
+    const { userId } = createGameByScenarioDto;
+    return this.gameService.createByScenarioId(userId, scenarioId);
+  }
+  
   @UseGuards(AuthGuard)
   @Get()
   @ApiOperation({ summary: 'Récupérer toutes les parties (games)' })

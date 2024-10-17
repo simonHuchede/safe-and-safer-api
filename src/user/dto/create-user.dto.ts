@@ -12,6 +12,6 @@ export class CreateUserDto {
 
   @ApiProperty({ example: 'securePassword123', description: 'The password of the user' })
   @IsString()
-  @MinLength(6)  // Assure que le mot de passe fait au moins 6 caractères
+  @MinLength(6)
   password: string;
 }

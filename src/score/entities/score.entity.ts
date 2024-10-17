@@ -10,7 +10,7 @@ export class Score {
 
   @ApiProperty({ example: 'user123', description: 'ID of the user to whom the score belongs' })
   @Column()
-  userId: string;  // Identifiant de l'utilisateur
+  userId: string;
 
   @ApiProperty({ description: 'List of games played by the user', type: [Game] })
   @Column({ type : 'array'})
@@ -18,7 +18,7 @@ export class Score {
 
   @ApiProperty({ example: 250, description: 'Total score of the user based on games played' })
   @Column()
-  totalScore: number;  // Score total de l'utilisateur basé sur ses parties
+  totalScore: number;
 
   @ApiProperty({ description: 'The date when the score was created' })
   @CreateDateColumn()

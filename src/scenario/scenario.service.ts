@@ -13,7 +13,6 @@ export class ScenarioService {
     private readonly scenarioRepository: Repository<Scenario>,
   ) {}
 
-  // Créer un nouveau scénario
   async create(createScenarioDto: CreateScenarioDto): Promise<Scenario> {
     const messagesWithIds = createScenarioDto.messages.map((message) => ({
       ...message,
@@ -45,24 +44,15 @@ export class ScenarioService {
     return this.scenarioRepository.save(scenarios);
   }
 
-  // Récupérer tous les scénarios
   async findAll(): Promise<Scenario[]> {
     return this.scenarioRepository.find();
   }
 
-  // Récupérer un scénario par son ID
   async findOne(id: string): Promise<Scenario> {
     const objectId = new ObjectId(id);
-    const scenario = await this.scenarioRepository.findOneBy({
-      scenarioId: objectId,
-    });
-    if (!scenario) {
-      throw new NotFoundException(`Scenario #${id} not found`);
-    }
-    return scenario;
+    return this.scenarioRepository.findOneBy({_id: objectId});
   }
 
-  // Mise à jour partielle d'un scénario avec PATCH
   async update(
     id: string,
     updateScenarioDto: UpdateScenarioDto,
@@ -72,7 +62,6 @@ export class ScenarioService {
     return this.scenarioRepository.save(scenario);
   }
 
-  // Supprimer un scénario
   async remove(id: string): Promise<void> {
     const result = await this.scenarioRepository.delete(id);
     if (result.affected === 0) {

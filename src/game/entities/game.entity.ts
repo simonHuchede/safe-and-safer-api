@@ -18,26 +18,26 @@ export class Game {
     type: () => Scenario,
   })
   @Column(type => Scenario)
-  scenario: Scenario;  // Le scénario joué par l'utilisateur
+  scenario: Scenario;
 
   @ApiProperty({ description: 'List of threats identified during the game', type: [Message] })
   @Column({ type: 'array' })
-  identifiedThreats: Message[];  // Messages identifiés comme menaces par le joueur
+  identifiedThreats: Message[];
 
   @ApiProperty({ description: 'List of threats missed by the player during the game', type: [Message] })
   @Column({ type: 'array' })
-  missedThreats: Message[];  // Messages de menace que le joueur a manqué
+  missedThreats: Message[];
 
   @ApiProperty({
     example: 3,
     description: 'Number of threats identified by the player during the game',
   })
   @Column()
-  threatsIdentified: number;  // Nombre de menaces identifiées par le joueur dans cette partie
+  threatsIdentified: number;
 
   @ApiProperty({ example: 85, description: 'The score obtained by the player during the game' })
   @Column()
-  score: number;  // Score obtenu par le joueur dans cette partie
+  score: number;
 
   @ApiProperty({ description: 'The date when the game was created' })
   @CreateDateColumn()

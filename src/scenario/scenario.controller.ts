@@ -6,7 +6,7 @@ import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { Scenario } from "./entities/scenario.entity";
 import { AuthGuard } from 'src/auth/auth.guard';
 
-@ApiTags('scenarios')  // Ajoute une catégorie "scenarios" dans Swagger
+@ApiTags('scenarios')
 @Controller('scenarios')
 export class ScenarioController {
   constructor(private readonly scenarioService: ScenarioService) { }
