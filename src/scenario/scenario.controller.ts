@@ -2,11 +2,12 @@ import { Controller, Get, Post, Patch, Param, Body, Delete, UseGuards } from '@n
 import { ScenarioService } from './scenario.service';
 import { CreateScenarioDto } from './dto/create-scenario.dto';
 import { UpdateScenarioDto } from './dto/update-scenario.dto';
-import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiBearerAuth } from "@nestjs/swagger";
 import { Scenario } from "./entities/scenario.entity";
 import { AuthGuard } from 'src/auth/auth.guard';
 
 @ApiTags('scenarios')
+@ApiBearerAuth()
 @Controller('scenarios')
 export class ScenarioController {
   constructor(private readonly scenarioService: ScenarioService) { }
